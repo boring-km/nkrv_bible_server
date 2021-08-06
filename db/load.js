@@ -3,8 +3,8 @@ const mysql = require('mysql');
 function getConnection(callback) {
     const config = {
         host: 'localhost',
-        port: 8080,
-        user: 'test',
+        port: 3306,
+        user: 'kangmin',
         password: '1234',
         database: 'bible',
         connectionLimit: 20,

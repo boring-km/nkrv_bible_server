@@ -12,6 +12,22 @@ const searchOne = async (req, res) => {
     }
 };
 
+const searchMultiLines = async (req, res) => {
+    try {
+        const { label, chapter, paragraphString } = req.params;
+        const paragraphArray = paragraphString.split('-');
+        const start = paragraphArray[0];
+        const end = paragraphArray[1];
+        const result = {
+            text: await dbService.searchMultiLines(label, chapter, start, end)
+        };
+        res.json(result);
+    } catch (err) {
+        res.status(500).json({ error: `err` });
+    }
+}
+
 module.exports = {
     searchOne,
+    searchMultiLines,
 }

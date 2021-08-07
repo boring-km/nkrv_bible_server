@@ -2,7 +2,7 @@ const db = require('./load');
 
 const searchOne = (label, chapter, paragraph) => new Promise((resolve) => {
     db((connection) => {
-        const query = `select long_label, chapter, paragraph, sentence from bible2 where long_label = '${label}' and chapter = ${chapter} and paragraph = ${paragraph};`;
+        const query = `select long_label, chapter, paragraph, sentence from bible2 where long_label = '${label}' and chapter = ${chapter} and paragraph = ${paragraph} and paragraph > 0;`;
         console.log(query);
         connection.query(query, (err, results) => {
             if (err) {
@@ -17,7 +17,7 @@ const searchOne = (label, chapter, paragraph) => new Promise((resolve) => {
 
 const searchMultiLines = (label, chapter, start, end) => new Promise((resolve) => {
     db((connection) => {
-        const query = `select long_label, chapter, paragraph, sentence from bible2 where long_label = '${label}' and chapter = ${chapter} and paragraph between ${start} and ${end};`;
+        const query = `select long_label, chapter, paragraph, sentence from bible2 where long_label = '${label}' and chapter = ${chapter} and paragraph between ${start} and ${end} and paragraph > 0;`;
         console.log(query);
         connection.query(query, (err, results) => {
             if (err) {
@@ -32,7 +32,7 @@ const searchMultiLines = (label, chapter, start, end) => new Promise((resolve) =
 
 const searchChapter = (label, chapter) => new Promise((resolve) => {
     db((connection) => {
-        const query = `select long_label, chapter, paragraph, sentence from bible2 where long_label = '${label}' and chapter = ${chapter};`;
+        const query = `select long_label, chapter, paragraph, sentence from bible2 where long_label = '${label}' and chapter = ${chapter} and paragraph > 0;`;
         console.log(query);
         connection.query(query, (err, results) => {
             if (err) {

@@ -5,7 +5,7 @@ const searchOne = async (req, res) => {
         const { label, chapter, paragraph } = req.params;
         const result = {
             text: await dbService.searchOne(label, chapter, paragraph)
-        }
+        };
         res.json(result);
     } catch (err) {
         res.status(500).json({ error: `err` });

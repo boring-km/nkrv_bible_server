@@ -45,8 +45,24 @@ const searchChapter = (label, chapter) => new Promise((resolve) => {
     });
 });
 
+const searchLabel = (label) => new Promise((resolve) => {
+    db((connection) => {
+        const query = `select long_label, chapter, paragraph, sentence from bible2 where long_label = '${label}' and paragraph > 0;`;
+        console.log(query);
+        connection.query(query, (err, results) => {
+            if (err) {
+                console.error(`searchLabel: ${err}`);
+                throw err;
+            }
+            resolve(results);
+        });
+        connection.release();
+    });
+})
+
 module.exports = {
     searchOne,
     searchMultiLines,
     searchChapter,
+    searchLabel,
 }

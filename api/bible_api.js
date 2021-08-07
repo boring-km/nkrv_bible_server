@@ -39,8 +39,21 @@ const searchChapter = async (req, res) => {
     }
 }
 
+const searchLabel = async (req, res) => {
+    try {
+        const { label } = req.params;
+        const result = {
+            text: await dbService.searchLabel(label)
+        };
+        res.json(result);
+    } catch (err) {
+        res.status(500).json({ error: `err` });
+    }
+}
+
 module.exports = {
     searchOne,
     searchMultiLines,
     searchChapter,
+    searchLabel,
 }

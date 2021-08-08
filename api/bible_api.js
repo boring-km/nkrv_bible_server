@@ -1,11 +1,5 @@
 const dbService = require('../db/search_service');
 
-const test = (req, res) => {
-    res.json({
-        test: "okay"
-    });
-}
-
 const searchOne = async (req, res) => {
     try {
         const { label, chapter, paragraph } = req.params;
@@ -58,7 +52,6 @@ const searchLabel = async (req, res) => {
 }
 
 module.exports = {
-    test,
     searchOne,
     searchMultiLines,
     searchChapter,

@@ -3,3 +3,4 @@ nkrv_bible.sql
 nkrv_bible_server.iml
 package-lock.json
 .idea
+.env

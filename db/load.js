@@ -2,11 +2,11 @@ const mysql = require('mysql');
 
 function getConnection(callback) {
     const config = {
-        host: 'localhost',
-        port: 3306,
-        user: 'kangmin',
-        password: '1234',
-        database: 'bible',
+        host: process.env.mysql_host,
+        port: process.env.mysql_port,
+        user: process.env.mysql_user,
+        password: process.env.mysql_password,
+        database: process.env.mysql_database,
         connectionLimit: 20,
     };
     const pool = mysql.createPool(config);

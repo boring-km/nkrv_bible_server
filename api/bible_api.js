@@ -47,7 +47,19 @@ const searchLabel = async (req, res) => {
         };
         res.json(result);
     } catch (err) {
-        res.status(500).json({ error: `err` });
+        res.status(500).json({ err });
+    }
+}
+
+const getBookCount = async (req, res) => {
+    try {
+        const { book } = req.params;
+        const result = {
+            result: await dbService.getBookCount(book)
+        };
+        res.json(result);
+    } catch (err) {
+        res.status(500).json({ err })
     }
 }
 
@@ -56,4 +68,5 @@ module.exports = {
     searchMultiLines,
     searchChapter,
     searchLabel,
+    getBookCount,
 }

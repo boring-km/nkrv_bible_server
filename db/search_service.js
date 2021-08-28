@@ -58,11 +58,26 @@ const searchLabel = (label) => new Promise((resolve) => {
         });
         connection.release();
     });
-})
+});
+
+const getBookCount = (book) => new Promise((resolve) => {
+    db((connection) => {
+        const query = `select chapter, count(idx) as 'count' from bible2 where long_label = '${book}' and paragraph > 0 group by chapter;`;
+        console.log(query);
+        connection.query(query, (err, results) => {
+            if (err) {
+                console.error(`getBookCount Chapter: ${err}`);
+                throw err;
+            }
+            resolve(results);
+        });
+    });
+});
 
 module.exports = {
     searchOne,
     searchMultiLines,
     searchChapter,
     searchLabel,
+    getBookCount,
 }

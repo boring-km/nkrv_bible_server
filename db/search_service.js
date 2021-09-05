@@ -71,6 +71,7 @@ const getBookCount = (book) => new Promise((resolve) => {
             }
             resolve(results);
         });
+        connection.release();
     });
 });
 

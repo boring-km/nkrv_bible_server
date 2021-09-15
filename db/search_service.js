@@ -2,7 +2,7 @@ const db = require('./load');
 
 const searchOne = (label, chapter, paragraph) => new Promise((resolve) => {
     db((connection) => {
-        const query = `select label, chapter, paragraph, sentence from bible where label = '${label}' and chapter = ${chapter} and paragraph = ${paragraph};`;
+        const query = `select label, chapter, paragraph, sentence from bible3 where label = '${label}' and chapter = ${chapter} and paragraph = ${paragraph};`;
         console.log(query);
         connection.query(query, (err, results) => {
             if (err) {
@@ -17,7 +17,7 @@ const searchOne = (label, chapter, paragraph) => new Promise((resolve) => {
 
 const searchMultiLines = (label, chapter, start, end) => new Promise((resolve) => {
     db((connection) => {
-        const query = `select label, chapter, paragraph, sentence from bible where label = '${label}' and chapter = ${chapter} and paragraph between ${start} and ${end};`;
+        const query = `select label, chapter, paragraph, sentence from bible3 where label = '${label}' and chapter = ${chapter} and paragraph between ${start} and ${end};`;
         console.log(query);
         connection.query(query, (err, results) => {
             if (err) {
@@ -32,7 +32,7 @@ const searchMultiLines = (label, chapter, start, end) => new Promise((resolve) =
 
 const searchChapter = (label, chapter) => new Promise((resolve) => {
     db((connection) => {
-        const query = `select label, chapter, paragraph, sentence from bible where label = '${label}' and chapter = ${chapter};`;
+        const query = `select label, chapter, paragraph, sentence from bible3 where label = '${label}' and chapter = ${chapter};`;
         console.log(query);
         connection.query(query, (err, results) => {
             if (err) {
@@ -47,7 +47,7 @@ const searchChapter = (label, chapter) => new Promise((resolve) => {
 
 const searchLabel = (label) => new Promise((resolve) => {
     db((connection) => {
-        const query = `select label, chapter, paragraph, sentence from bible where label = '${label}';`;
+        const query = `select label, chapter, paragraph, sentence from bible3 where label = '${label}';`;
         console.log(query);
         connection.query(query, (err, results) => {
             if (err) {
@@ -62,7 +62,7 @@ const searchLabel = (label) => new Promise((resolve) => {
 
 const getBookCount = (book) => new Promise((resolve) => {
     db((connection) => {
-        const query = `select chapter, count(id) as 'count' from bible where label = '${book}' group by chapter;`;
+        const query = `select chapter, count(id) as 'count' from bible3 where label = '${book}' group by chapter;`;
         console.log(query);
         connection.query(query, (err, results) => {
             if (err) {

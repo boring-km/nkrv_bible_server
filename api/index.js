@@ -10,5 +10,6 @@ router.get('/searchMul/:label/:chapter/:paragraphString', bibleApi.searchMultiLi
 router.get('/search/:label/:chapter', bibleApi.searchChapter);
 router.get('/search/:label', bibleApi.searchLabel);
 router.get('/count/:book', bibleApi.getBookCount);
+router.get('/textLength/:label/:chapter', bibleApi.getPreviousTextTotalLength);
 
 module.exports = router;

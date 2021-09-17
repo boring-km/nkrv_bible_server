@@ -60,9 +60,9 @@ const searchLabel = (label) => new Promise((resolve) => {
     });
 });
 
-const getBookCount = (book) => new Promise((resolve) => {
+const getBookCount = (label) => new Promise((resolve) => {
     db((connection) => {
-        const query = `select chapter, count(id) as 'count' from bible3 where label = '${book}' group by chapter;`;
+        const query = `select chapter, count(id) as 'count' from bible3 where label = '${label}' group by chapter;`;
         console.log(query);
         connection.query(query, (err, results) => {
             if (err) {
@@ -75,10 +75,26 @@ const getBookCount = (book) => new Promise((resolve) => {
     });
 });
 
+const getPreviousTextTotalLength = (book, chapter) => new Promise((resolve) => {
+    db((connection) => {
+        const query = `select coalesce(sum(char_length(sentence)),0) as result from bible3 where label = '${book}' and chapter < ${chapter}`;
+        console.log(query);
+        connection.query(query, (err, results) => {
+            if (err) {
+                console.error(`getBookCount Chapter: ${err}`);
+                throw err;
+            }
+            resolve(results[0]);
+        });
+        connection.release();
+    })
+});
+
 module.exports = {
     searchOne,
     searchMultiLines,
     searchChapter,
     searchLabel,
     getBookCount,
+    getPreviousTextTotalLength,
 }

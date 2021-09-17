@@ -53,13 +53,25 @@ const searchLabel = async (req, res) => {
 
 const getBookCount = async (req, res) => {
     try {
-        const { book } = req.params;
+        const { label } = req.params;
         const result = {
-            result: await dbService.getBookCount(book)
+            result: await dbService.getBookCount(label)
         };
         res.json(result);
     } catch (err) {
-        res.status(500).json({ err })
+        res.status(500).json({ err });
+    }
+}
+
+const getPreviousTextTotalLength = async (req, res) => {
+    try {
+        const { label, chapter } = req.params;
+        const result = {
+            result: await dbService.getPreviousTextTotalLength(label, chapter)
+        };
+        res.json(result);
+    } catch (err) {
+        res.status(500).json({ err });
     }
 }
 
@@ -69,4 +81,5 @@ module.exports = {
     searchChapter,
     searchLabel,
     getBookCount,
+    getPreviousTextTotalLength
 }

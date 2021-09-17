@@ -7,7 +7,7 @@ function getConnection(callback) {
         user: process.env.mysql_user,
         password: process.env.mysql_password,
         database: process.env.mysql_database,
-        connectionLimit: 20,
+        connectionLimit: 40,
     };
     const pool = mysql.createPool(config);
     pool.getConnection((err, conn) => {
